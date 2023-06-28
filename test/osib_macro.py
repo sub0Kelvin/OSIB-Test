@@ -1,18 +1,12 @@
-# Open Security Information Base (OSIB)
-
-## Important Notice
-This repository has been moved to an official OWASP Project:
-- Project Page: https://owasp.org/www-project-open-security-information-base
-- Software Repository: https://github.com/OWASP/OSIB
-
-**Please use the new Repository**
-<!----
-
-Tools:<br>
-- mkdocs_macro_osib.py  (manually insallable python module)<br>
-- osib_macro.py         (macro to copy that imports the python module)<br>
-```
+# Filename: osib_macro.py
 #!##################################################################################################################################################
+#!#                                  MkDocs-Macro to use and extend the Open Security Information Base (OSIB)
+#!#                                                         Version: 2021-12-05
+#!# ------------------------------------------------------------------------------------------------------------------------------------------------
+#!#                            THIS Software is in BETA state, please give us feed back via the github repository
+#!#                                                   https://github.com/sslHello/OSIB-Test
+#!# ------------------------------------------------------------------------------------------------------------------------------------------------
+#!#
 #!# This MkDocs MACRO has been developed by the OWASP-Top 10 Project in 2021.
 #!# It provides a central management of links in MkDocs documents. This includes the versioning of links inside a project,
 #!# standard or a group of documents and to external sources. By exporting the update OSIB structure in a YAML file all efforts
@@ -22,18 +16,18 @@ Tools:<br>
 #!#
 #!# ------------------------------------------------------------------------------------------------------------------------------------------------
 #!#
-#!# This Python program provides a module including two MkDocs macros to use with markdown:
+#!# This Python program provides two MkDocs macros to use with markdown:
 #!# - osib_anchor:  Adds an OSIB anchor and an object to an osib YAML structure
 #!#         Input:  osib_anchor(osib=osib.<organization>.<project|standard>.<version(without dots '.')>.<internal structure>, create_organization=False
 #!#                             source_id=<id inside the source>, lang=<lang>, source=<url_i18n>, name=<name_i18n>,
-#!#                             parent=<osib-id>, predecessor=<osib-id>, split_from=<osib.id>, merged_from=[<list of osib-ids>, ... ],
+#!#                             parent=<osib-id>, predecessor=<osib-id>, splitted_from=<osib.id>, merged_from=<osib-id>
 #!#                             cre=<osib-id>, aliases=[<list of aliases>, ...])
 #!#         Output: '<a id="<osib>"></a>' (HTTP-anchor), and updates in the OSIB YAML tree
 #!#
 #!# - osib_link:    Get links from a osib YAML tree, optionally find successors and add linking information bidirectionally
 #!#                 to the OSIB YAML tree
 #!#       Input:    osib_link  (link=osib.<organization>.<project|standard>.<version(without dots '.')>.<internal structure>, create_organization=False
-#!#                             doc=<osib>, type=<reference|predecessor|successor|merged_from|split_from|...>,
+#!#                             doc=<osib>, type=<reference|predecessor|successor|merged_from|ispiltted_from|...>,
 #!#                             osib=<osib>, reviewed=<datestamp(YYYYMMDD)>, status=<active|draft|...>)
 #!#       Output:   markdown link format '["<text>|<prefix><doc_osib><doc_suffix><osib_names>"](<html_link>)<speparator> ..') and/or successor/s
 #!#
@@ -43,26 +37,11 @@ Tools:<br>
 #!# ------------------------------------------------------------------------------------------------------------------------------------------------
 #!#
 #!# Requirements:
-#!# - mkdocs:               pip install mkdocs               (https://mkdocs.org)
+#!# - mkdocs:               pip install mkdocs               (https://www.mkdocs.org)
 #!# - mkdocs-macros-plugin: pip install mkdocs-macros-plugin (https://mkdocs-macros-plugin.readthedocs.io/en/latest/)
 #!# - dacite:               pip install dacite               (https://github.com/konradhalas/dacite)
-#!#
-#!# Installation:
-#!# Actually 'manual installation' only:
-#!#    cd <your path>/mkdocs_macro_osib_package
-#!#    pip install .
-#!# verify if osib is in your pip list
-#!#    pip list | grep osib
-#!#
-#!# Developers Installation
-#!#    cd <your path>/mkdocs_macro_osib_package
-#!#    pip install -e .
-#!# verify if osib is in your pip list
-#!#    pip list | grep osib
-#!#
-#!$ Copy or edit 'osib_macro.py' to the root folder of your mkdocs document
-#!#    from mkdocs_macro_osib import define_env, on_post_build
-#!#    #provides MkDocs macros 'osib_anchor' and 'osib_link'
+#!# - mkdocs-macro-osib:    cd mkdocs-macro-osib_package
+#!#                         pip install .
 #!#
 #!# To use the macros add in 'mkdocs.yml' (if you use the plugin 'i18n' add this macro after it):
 #!# plugins:
@@ -87,12 +66,12 @@ Tools:<br>
 #!#        en:         successor
 #!#        de:         Nachfolger
 #!#      split_to_texts:
-#!#        en:         split to
+#!#        en:         splitted to
 #!#        de:         Aufgeteilt in
 #!#
 #!# ------------------------------------------------------------------------------------------------------------------------------------------------
 #!# This software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties
-#!# of merchantability, fitness for a particular purpose. In no event shall the copyright holders or authors be liable for any claim, 
+#!# of merchantability, fitness for a particular purpose. In no event shall the copyright holders or authors be liable for any claim,
 #!# damages or other liability. This software is distributed in the hope that it will be useful.
 #!#
 #!# (C) OWASP/The Top10-Team, 2021
@@ -105,5 +84,7 @@ Tools:<br>
 #!# this, is also licensed under the same GPL license.
 #!#
 #!##################################################################################################################################################
-```
------>
+
+from mkdocs_macro_osib import define_env, on_post_build
+#provides MkDocs macros 'osib_anchor' and 'osib_link'
+
